@@ -6,10 +6,10 @@ Being an important part of decompilation, the decompiler's itermediate represent
 > [!NOTE]
 > All the work is store in notebooks folder...
 
-## Microde explorer plugins
+## IR explorer plugins
 
 - [Lucid for IDA](https://github.com/Fireboyd78/lucid)
-- [... for BinaryNinja]()
+- No plugin for BinaryNinja, already have a mulitple native integrations of BNIL explorer
 - [... for Ghidra]()
 
 ## References
