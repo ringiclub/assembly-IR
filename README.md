@@ -8,6 +8,9 @@ Being an important part of decompilation, the decompiler's microcode is somethin
 The microcode, also called IR (Intermediate Representation), is the first stage of IDA decompilation process. <br>
 In this case, microcode is the IR of assembly instruction, think of them like LLVM'S IR.
 
+> [!NOTE]
+> All the work is store in notebooks folder...
+
 ## Microde explorer plugins
 
 - [Lucid for IDA](https://github.com/Fireboyd78/lucid)
