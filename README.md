@@ -16,8 +16,18 @@ In this case, microcode is the IR of assembly instruction, think of them like LL
 
 ## References
 
+* 
+* 
+* 
+* 
 
 ## Quote us
 ```tex
-@misc{}
+@misc{reverse_engineering_analysis,
+  author       = {Alexis Daugé (aldauge)},
+  title        = {Analyses of Various Decompiler Microcode},
+  year         = {2024},
+  howpublished = {Work-Study Program Report},
+  url          = {https://github.com/ringiclub/microcode},
+}
 ```
