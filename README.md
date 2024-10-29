@@ -12,13 +12,6 @@ Being an important part of decompilation, the decompiler's itermediate represent
 - No plugin for BinaryNinja, already have a mulitple native integrations of BNIL explorer
 - [... for Ghidra]()
 
-## References
-
-* 
-* 
-* 
-* 
-
 ## Quote us
 ```tex
 @misc{reverse_engineering_analysis,
