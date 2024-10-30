@@ -140,6 +140,9 @@ class MicrocodePlayground(idaapi.plugin_t):
                 mba = self.get_microcode(int(addr, 16), 0)
 
                 if mba:
+                    # will dump microcode into a file only if IDA is in debugger mod
+                    # mba.dump()
+
                     for i in range(mba.qty):
                         block = mba.get_mblock(i)
                         
