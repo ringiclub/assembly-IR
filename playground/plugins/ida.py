@@ -14,6 +14,7 @@ class MicrocodePlayground(idaapi.plugin_t):
     wanted_hotkey = "Ctrl-Shift-P"
 
     def init(self):
+        # i'm dump asf cause all of this is in ida_hexrays.....
         self.opcode_dict = {
             0x00: "m_nop",     # no operation
             0x01: "m_stx",     # store register to memory
@@ -91,7 +92,7 @@ class MicrocodePlayground(idaapi.plugin_t):
         }
 
         return idaapi.PLUGIN_OK
-    
+     
     def get_funcs(self) -> list:
         functions = []
         for func_ea in idautils.Functions():
@@ -118,34 +119,39 @@ class MicrocodePlayground(idaapi.plugin_t):
         ida_hexrays.mark_cfunc_dirty(func.start_ea)
         mba = ida_hexrays.gen_microcode(mbr, hf, ml, ida_hexrays.DECOMP_NO_WAIT, maturity)
 
-
         if not mba:
             print("0x%08X: %s" % (hf.errea, hf.desc()))
             return None
         return mba
 
+    def get_maturity(self, mat_name: str):
+        for v, n in sorted([(getattr(ida_hexrays, x), x) for x in filter(lambda y: y.startswith('MMAT_'), dir(ida_hexrays))])[1:]:
+            print((v, n))
+            # if n == mat_name:
+            #     return v
+        return None
+
     def run(self, arg):  # pylint: disable=unused-argument
         idaapi.msg_clear()
 
-        function_list = self.get_funcs()
+        function_list = self.get_funcs()  # Get all functions in the binary
+        target_function_name = "main"  # Replace with your target function's name
         microcode_instructions = []
 
         for name, addr in function_list:
-            if name == "main":
-                ida_kernwin.msg(f"{name} : {addr}\n")
+            if name == target_function_name:  # Only target the specific function
+                ida_kernwin.msg(f"Extracting microcode for {name} at {addr}\n")
 
+                # Get the pseudocode for reference (optional)
                 pseudocode = self.get_pseudocode(int(addr, 16))
                 ida_kernwin.msg(f"Pseudocode for {name}:\n{pseudocode}\n")
 
-                mba = self.get_microcode(int(addr, 16), 0)
+                # Extract microcode for the function
+                mba = self.get_microcode(int(addr, 16), 1)
 
                 if mba:
-                    # will dump microcode into a file only if IDA is in debugger mod
-                    # mba.dump()
-
                     for i in range(mba.qty):
                         block = mba.get_mblock(i)
-                        
                         insn = block.head
                         while insn:
                             opcode_name = self.opcode_dict.get(insn.opcode, "Unknown opcode")
@@ -155,10 +161,7 @@ class MicrocodePlayground(idaapi.plugin_t):
                                 "Operands": (str(insn.l), str(insn.r))
                             })
                             insn = insn.next
-            
-        for instruction in microcode_instructions:
-            print(f"Instruction: {instruction['Instruction']}\n")
-            print(f"Opcode: {instruction['Opcode']}, Operands: {instruction['Operands']}\n\n")
+        print("End of plugin.")
 
     def term(self):
         print("End.")
