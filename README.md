@@ -10,7 +10,7 @@ Being an important part of decompilation, the decompiler's itermediate represent
 
 - [Lucid for IDA](https://github.com/Fireboyd78/lucid)
 - No plugin for BinaryNinja, already have a mulitple native integrations of BNIL explorer
-- [... for Ghidra]()
+- [?? for Ghidra]()
 
 ## Quote us
 ```tex
